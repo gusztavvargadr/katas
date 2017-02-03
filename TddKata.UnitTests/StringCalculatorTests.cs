@@ -13,6 +13,7 @@ namespace TddKata.UnitTests
         public class Add
         {
             [Theory]
+            [InlineData(null, 0)]
             [InlineData("", 0)]
             public void ReturnsSum(string numbers, int sum)
             {
