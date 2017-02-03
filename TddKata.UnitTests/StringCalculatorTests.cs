@@ -15,6 +15,9 @@ namespace TddKata.UnitTests
             [Theory]
             [InlineData(null, 0)]
             [InlineData("", 0)]
+            [InlineData("0", 0)]
+            [InlineData("1", 1)]
+            [InlineData("100", 100)]
             public void ReturnsSum(string numbers, int sum)
             {
                 var stringCalculator = new StringCalculator();
