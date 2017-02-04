@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TddKata;
-using Xunit;
+﻿using Xunit;
 
 namespace TddKata.UnitTests
 {
@@ -12,19 +6,47 @@ namespace TddKata.UnitTests
     {
         public class Add
         {
-            [Theory]
-            [InlineData(null, 0)]
-            [InlineData("", 0)]
-            [InlineData("0", 0)]
-            [InlineData("1", 1)]
-            [InlineData("100", 100)]
-            public void ReturnsSum(string numbers, int sum)
+            // ReSharper disable once UnusedParameter.Local
+            private static void AssertAdd(string numbers, int expectedSum)
             {
                 var stringCalculator = new StringCalculator();
 
-                var result = stringCalculator.Add(numbers);
+                var actualSum = stringCalculator.Add(numbers);
 
-                Assert.Equal(sum, result);
+                Assert.Equal(expectedSum, actualSum);
+            }
+
+            public class EmptyString : Add
+            {
+                [Fact]
+                public void ReturnsZero()
+                {
+                    AssertAdd(string.Empty, 0);
+                }
+            }
+
+            public class SingleNumber : Add
+            {
+                [Theory]
+                [InlineData("0", 0)]
+                [InlineData("1", 1)]
+                [InlineData("2", 2)]
+                public void ReturnsSingleNumber(string numbers, int expectedSum)
+                {
+                    AssertAdd(numbers, expectedSum);
+                }
+            }
+
+            public class TwoNumbers : Add
+            {
+                [Theory]
+                [InlineData("0,1", 1)]
+                [InlineData("1,2", 3)]
+                [InlineData("2,3", 5)]
+                public void ReturnsSum(string numbers, int expectedSum)
+                {
+                    AssertAdd(numbers, expectedSum);
+                }
             }
         }
     }

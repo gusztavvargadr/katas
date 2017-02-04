@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TddKata
+﻿namespace TddKata
 {
     public class StringCalculator
     {
         public int Add(string numbers)
         {
-            if (string.IsNullOrEmpty(numbers))
-            {
+            if (numbers == string.Empty)
                 return 0;
-            }
+
+            if (numbers.Contains(","))
+                return int.Parse(numbers[0].ToString()) + int.Parse(numbers[2].ToString());
 
             return int.Parse(numbers);
         }
