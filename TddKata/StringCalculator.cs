@@ -5,11 +5,12 @@ namespace TddKata
 {
     public class StringCalculator
     {
-        private const char NumberSeparator = ',';
+        // ReSharper disable once InconsistentNaming
+        private readonly char[] NumberSeparators = {',', '\n'};
 
         public int Add(string numbers)
         {
-            return numbers.Split(new[] {NumberSeparator}, StringSplitOptions.RemoveEmptyEntries).Sum(int.Parse);
+            return numbers.Split(NumberSeparators, StringSplitOptions.RemoveEmptyEntries).Sum(int.Parse);
         }
     }
 }
