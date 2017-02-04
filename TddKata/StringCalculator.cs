@@ -25,7 +25,15 @@ namespace TddKata
                 numbers = numbers.Substring(4);
             }
 
-            return numbers.Split(NumberSeparators, StringSplitOptions.RemoveEmptyEntries).Sum(int.Parse);
+            var allNumbers =
+                numbers.Split(NumberSeparators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+            var negativeNumbers = allNumbers.Where(item => item < 0).ToList();
+            if (negativeNumbers.Any())
+            {
+                throw new ArgumentException(
+                    $"negatives not allowed: {string.Join(", ", negativeNumbers)}");
+            }
+            return allNumbers.Sum();
         }
     }
 }

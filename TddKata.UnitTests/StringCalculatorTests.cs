@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System;
+using System.Globalization;
+using Xunit;
 
 namespace TddKata.UnitTests
 {
@@ -87,6 +89,25 @@ namespace TddKata.UnitTests
                 public void ReturnsSum(string numbers, int expectedSum)
                 {
                     AssertSumEquals(numbers, expectedSum);
+                }
+            }
+
+            public class NegativeNumbers : Add
+            {
+                [Theory]
+                [InlineData("-1", new[] {-1})]
+                [InlineData("1,-2", new[] {-2})]
+                [InlineData("-1,-2", new[] {-1, -2})]
+                public void Throws(string numbers, int[] negativeNumbers)
+                {
+                    var stringCalculator = new StringCalculator();
+
+                    var exception = Assert.Throws<ArgumentException>(() => stringCalculator.Add(numbers));
+                    Assert.Contains("negatives not allowed", exception.Message);
+                    Assert.All(negativeNumbers,
+                        item =>
+                            Assert.Contains(item.ToString(CultureInfo.InvariantCulture),
+                                exception.Message));
                 }
             }
         }
