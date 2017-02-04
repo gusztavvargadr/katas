@@ -7,7 +7,7 @@ namespace TddKata.UnitTests
         public class Add
         {
             // ReSharper disable once UnusedParameter.Local
-            private static void AssertAdd(string numbers, int expectedSum)
+            private static void AssertSumEquals(string numbers, int expectedSum)
             {
                 var stringCalculator = new StringCalculator();
 
@@ -21,7 +21,7 @@ namespace TddKata.UnitTests
                 [Fact]
                 public void ReturnsZero()
                 {
-                    AssertAdd(string.Empty, 0);
+                    AssertSumEquals(string.Empty, 0);
                 }
             }
 
@@ -33,7 +33,7 @@ namespace TddKata.UnitTests
                 [InlineData("2", 2)]
                 public void ReturnsSingleNumber(string numbers, int expectedSum)
                 {
-                    AssertAdd(numbers, expectedSum);
+                    AssertSumEquals(numbers, expectedSum);
                 }
             }
 
@@ -45,7 +45,22 @@ namespace TddKata.UnitTests
                 [InlineData("2,3", 5)]
                 public void ReturnsSum(string numbers, int expectedSum)
                 {
-                    AssertAdd(numbers, expectedSum);
+                    AssertSumEquals(numbers, expectedSum);
+                }
+            }
+
+            public class AnyNumbers : Add
+            {
+                [Theory]
+                [InlineData("0,1,2", 3)]
+                [InlineData("1,2,3", 6)]
+                [InlineData("0,1,2,3", 6)]
+                [InlineData("1,2,3,4", 10)]
+                [InlineData("0,1,2,3,4", 10)]
+                [InlineData("1,2,3,4,5", 15)]
+                public void ReturnsSum(string numbers, int expectedSum)
+                {
+                    AssertSumEquals(numbers, expectedSum);
                 }
             }
         }

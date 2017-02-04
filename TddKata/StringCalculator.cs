@@ -1,16 +1,15 @@
-﻿namespace TddKata
+﻿using System;
+using System.Linq;
+
+namespace TddKata
 {
     public class StringCalculator
     {
+        private const char NumberSeparator = ',';
+
         public int Add(string numbers)
         {
-            if (numbers == string.Empty)
-                return 0;
-
-            if (numbers.Contains(","))
-                return int.Parse(numbers[0].ToString()) + int.Parse(numbers[2].ToString());
-
-            return int.Parse(numbers);
+            return numbers.Split(new[] {NumberSeparator}, StringSplitOptions.RemoveEmptyEntries).Sum(int.Parse);
         }
     }
 }
