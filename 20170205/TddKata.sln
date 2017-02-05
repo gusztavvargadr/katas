@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5415E1F3-87C4-4641-BE37-D338F344B628}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3363644E-C624-496E-BF64-69CFC2A17DB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D4E90F5A-91D8-48CC-8A23-9F174978A47F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{D384C148-FCEE-45A1-8150-BE2C416A1F43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.UnitTests", "test\Core.UnitTests\Core.UnitTests.csproj", "{2BE2D345-6E6D-4BA5-856D-A14A38FE18BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D384C148-FCEE-45A1-8150-BE2C416A1F43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D384C148-FCEE-45A1-8150-BE2C416A1F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D384C148-FCEE-45A1-8150-BE2C416A1F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D384C148-FCEE-45A1-8150-BE2C416A1F43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE2D345-6E6D-4BA5-856D-A14A38FE18BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE2D345-6E6D-4BA5-856D-A14A38FE18BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE2D345-6E6D-4BA5-856D-A14A38FE18BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE2D345-6E6D-4BA5-856D-A14A38FE18BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D384C148-FCEE-45A1-8150-BE2C416A1F43} = {3363644E-C624-496E-BF64-69CFC2A17DB5}
+		{2BE2D345-6E6D-4BA5-856D-A14A38FE18BA} = {D4E90F5A-91D8-48CC-8A23-9F174978A47F}
+	EndGlobalSection
+EndGlobal
