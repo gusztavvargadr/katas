@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace TddKata.UnitTests
 {
@@ -25,7 +26,7 @@ namespace TddKata.UnitTests
                 }
             }
 
-            public class SingleNumber
+            public class SingleNumber : Add
             {
                 [Theory]
                 [InlineData("0", 0)]
@@ -37,7 +38,7 @@ namespace TddKata.UnitTests
                 }
             }
 
-            public class TwoNumbers
+            public class TwoNumbers : Add
             {
                 [Theory]
                 [InlineData("0,1", 1)]
@@ -49,7 +50,7 @@ namespace TddKata.UnitTests
                 }
             }
 
-            public class AnyNumbers
+            public class AnyNumbers : Add
             {
                 [Theory]
                 [InlineData("0,1,2", 3)]
@@ -61,6 +62,27 @@ namespace TddKata.UnitTests
                 public void ReturnsSum(string numbers, int sum)
                 {
                     AssertResultEquals(numbers, sum);
+                }
+            }
+
+            public class NewLineDelimiter : Add
+            {
+                [Theory]
+                [InlineData("0\n1,2", 3)]
+                [InlineData("0,1\n2", 3)]
+                [InlineData("0\n1\n2", 3)]
+                public void ReturnsSum(string numbers, int sum)
+                {
+                    AssertResultEquals(numbers, sum);
+                }
+
+                [Theory]
+                [InlineData("1,\n")]
+                public void ThrowsForMultipleDelimiters(string numbers)
+                {
+                    var stringCalculator = new StringCalculator();
+
+                    Assert.ThrowsAny<Exception>(() => stringCalculator.Add(numbers));
                 }
             }
         }
