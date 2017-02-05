@@ -1,4 +1,6 @@
-﻿namespace TddKata
+﻿using System.Linq;
+
+namespace TddKata
 {
     public class StringCalculator
     {
@@ -9,10 +11,7 @@
             if (numbers == string.Empty)
                 return 0;
 
-            if (numbers.Length > 1 && numbers[1] == NumberDelimiter)
-                return int.Parse(numbers[0].ToString()) + int.Parse(numbers[2].ToString());
-
-            return int.Parse(numbers);
+            return numbers.Split(NumberDelimiter).Sum(int.Parse);
         }
     }
 }

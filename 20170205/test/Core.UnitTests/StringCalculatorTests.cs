@@ -48,6 +48,21 @@ namespace TddKata.UnitTests
                     AssertResultEquals(numbers, sum);
                 }
             }
+
+            public class AnyNumbers
+            {
+                [Theory]
+                [InlineData("0,1,2", 3)]
+                [InlineData("1,2,3", 6)]
+                [InlineData("2,3,4", 9)]
+                [InlineData("0,1,2,3", 6)]
+                [InlineData("1,2,3,4", 10)]
+                [InlineData("2,3,4,5", 14)]
+                public void ReturnsSum(string numbers, int sum)
+                {
+                    AssertResultEquals(numbers, sum);
+                }
+            }
         }
     }
 }
