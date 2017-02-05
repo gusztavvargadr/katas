@@ -69,8 +69,8 @@ namespace TddKata.UnitTests
             {
                 [Theory]
                 [InlineData("0\n1,2", 3)]
-                [InlineData("0,1\n2", 3)]
-                [InlineData("0\n1\n2", 3)]
+                [InlineData("1,2\n3", 6)]
+                [InlineData("2\n3\n4", 9)]
                 public void ReturnsSum(string numbers, int sum)
                 {
                     AssertResultEquals(numbers, sum);
@@ -83,6 +83,18 @@ namespace TddKata.UnitTests
                     var stringCalculator = new StringCalculator();
 
                     Assert.ThrowsAny<Exception>(() => stringCalculator.Add(numbers));
+                }
+            }
+
+            public class CustomDelimiter : Add
+            {
+                [Theory]
+                [InlineData("//;\n0;1", 1)]
+                [InlineData("//:\n1:2", 3)]
+                [InlineData("//a\n2a3", 5)]
+                public void ReturnsSum(string numbers, int sum)
+                {
+                    AssertResultEquals(numbers, sum);
                 }
             }
         }
