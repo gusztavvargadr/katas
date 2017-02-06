@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace TddKata
 {
@@ -25,7 +26,13 @@ namespace TddKata
                 numbers = numbers.Substring(4);
             }
 
-            return numbers.Split(NumberSeparators).Select(int.Parse).Sum();
+            var items = numbers.Split(NumberSeparators).Select(int.Parse).ToList();
+            var negativeItems = items.Where(item => item < 0).ToList();
+            if (negativeItems.Any())
+                throw new ArgumentOutOfRangeException(nameof(numbers),
+                    $"negatives not allowed: {string.Join(", ", negativeItems)}");
+
+            return items.Sum();
         }
     }
 }
