@@ -60,6 +60,31 @@ namespace TddKata.UnitTests
                     AssertResultEquals(numbers, expexctedResult);
                 }
             }
+
+            public class NewLineSeparator : Add
+            {
+                [Theory]
+                [InlineData("0,1\n2", 3)]
+                [InlineData("1\n2,3", 6)]
+                [InlineData("2\n3\n4", 9)]
+                public void ReturnsSum(string numbers, int expexctedResult)
+                {
+                    AssertResultEquals(numbers, expexctedResult);
+                }
+            }
+
+
+            public class CustomSeparator : Add
+            {
+                [Theory]
+                [InlineData("//;\n0;1", 1)]
+                [InlineData("//:\n1:2", 3)]
+                [InlineData("//a\n2a3", 5)]
+                public void ReturnsSum(string numbers, int expexctedResult)
+                {
+                    AssertResultEquals(numbers, expexctedResult);
+                }
+            }
         }
     }
 }
