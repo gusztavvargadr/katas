@@ -60,6 +60,18 @@ namespace TddKata.UnitTests
                     AssertResultEquals(numbers, expectedResult);
                 }
             }
+
+            public class NewLineDelimiter : Add
+            {
+                [Theory]
+                [InlineData("1\n2,3", 6)]
+                [InlineData("1,2\n3", 6)]
+                [InlineData("1\n2\n3", 6)]
+                public void ReturnsSum(string numbers, int expectedResult)
+                {
+                    AssertResultEquals(numbers, expectedResult);
+                }
+            }
         }
     }
 }
