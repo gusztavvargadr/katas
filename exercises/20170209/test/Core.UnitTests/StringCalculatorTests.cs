@@ -72,6 +72,18 @@ namespace TddKata.UnitTests
                     AssertResultEquals(numbers, expectedResult);
                 }
             }
+
+            public class CustomDelimiter : Add
+            {
+                [Theory]
+                [InlineData("//;\n0;1", 1)]
+                [InlineData("//:\n1:2:3", 6)]
+                [InlineData("//a\n2a3a4", 9)]
+                public void ReturnsSum(string numbers, int expectedResult)
+                {
+                    AssertResultEquals(numbers, expectedResult);
+                }
+            }
         }
     }
 }
