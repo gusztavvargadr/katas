@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace TddKata.UnitTests
 {
@@ -82,6 +83,60 @@ namespace TddKata.UnitTests
                 public void ReturnsSum(string numbers, int expectedResult)
                 {
                     AssertResultEquals(numbers, expectedResult);
+                }
+            }
+
+            public class NegativeNumbers : Add
+            {
+                [Theory]
+                [InlineData("-1")]
+                [InlineData("1,-2")]
+                [InlineData("-1,-2")]
+                public void Throws(string numbers)
+                {
+                    var stringCalculator = new StringCalculator();
+
+                    Assert.Throws<ArgumentOutOfRangeException>(() => stringCalculator.Add(numbers));
+                }
+
+                [Theory]
+                [InlineData("-1")]
+                [InlineData("1,-2")]
+                [InlineData("-1,-2")]
+                public void ExceptionMessageContainsDescription(string numbers)
+                {
+                    try
+                    {
+                        var stringCalculator = new StringCalculator();
+
+                        stringCalculator.Add(numbers);
+
+                        Assert.True(false);
+                    }
+                    catch (ArgumentOutOfRangeException ex)
+                    {
+                        Assert.Contains("negatives not allowed", ex.Message);
+                    }
+                }
+
+                [Theory]
+                [InlineData("-1", new[] {-1})]
+                [InlineData("1,-2", new[] {-2})]
+                [InlineData("-1,-2", new[] {-1, -2})]
+                public void ExceptionMessageContainsNegativesNumbers(string numbers, int[] negativeNumbers)
+                {
+                    try
+                    {
+                        var stringCalculator = new StringCalculator();
+
+                        stringCalculator.Add(numbers);
+
+                        Assert.True(false);
+                    }
+                    catch (ArgumentOutOfRangeException ex)
+                    {
+                        Assert.All(negativeNumbers, item => Assert.Contains(item.ToString(), ex.Message));
+                    }
                 }
             }
         }
