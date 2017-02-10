@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace GusztavVargadDr.Tdd.Katas.UnitTests
 {
@@ -82,6 +83,20 @@ namespace GusztavVargadDr.Tdd.Katas.UnitTests
                 public void ReturnsSum(string numbers, int expectedResult)
                 {
                     AssertResultEquals(numbers, expectedResult);
+                }
+            }
+
+            public class NegativeNumbers : Add
+            {
+                [Theory]
+                [InlineData("-1")]
+                [InlineData("1,-2")]
+                [InlineData("-2,-3")]
+                public void Throws(string numbers)
+                {
+                    var stringCalculator = new StringCalculator();
+
+                    Assert.Throws<ArgumentOutOfRangeException>(() => stringCalculator.Add(numbers));
                 }
             }
         }
