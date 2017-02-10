@@ -4,14 +4,30 @@ namespace GusztavVargadDr.Tdd.Katas
 {
     public class StringCalculator
     {
+        private const int DefaultSum = 0;
+        private const string CustomDelimiterMark = "//";
+        private const char CustomDelimiterDelimiter = '\n';
+        private static readonly char[] DefaultDelimiters = {',', '\n'};
+
+        public StringCalculator()
+        {
+            Delimiters = DefaultDelimiters;
+        }
+
+        private char[] Delimiters { get; set; }
+
         public int Add(string numbers)
         {
             if (numbers == string.Empty)
+                return DefaultSum;
+
+            if (numbers.StartsWith(CustomDelimiterMark) && numbers[3] == CustomDelimiterDelimiter)
             {
-                return 0;
+                Delimiters = new[] {numbers[2]};
+                numbers = numbers.Substring(4);
             }
 
-            var items = numbers.Split(',', '\n').Select(int.Parse).ToList();
+            var items = numbers.Split(Delimiters).Select(int.Parse).ToList();
             return items.Sum();
         }
     }
