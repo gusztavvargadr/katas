@@ -48,6 +48,18 @@ namespace GusztavVargadDr.Tdd.Katas.UnitTests
                     AssertResultEquals(numbers, expectedResult);
                 }
             }
+
+            public class AnyNumbers : Add
+            {
+                [Theory]
+                [InlineData("0,1,2", 3)]
+                [InlineData("1,2,3,4", 10)]
+                [InlineData("2,3,4,5,6", 20)]
+                public void ReturnsSum(string numbers, int expectedResult)
+                {
+                    AssertResultEquals(numbers, expectedResult);
+                }
+            }
         }
     }
 }

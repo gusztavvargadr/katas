@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace GusztavVargadDr.Tdd.Katas
 {
     public class StringCalculator
@@ -9,12 +11,8 @@ namespace GusztavVargadDr.Tdd.Katas
                 return 0;
             }
 
-            if (numbers.Contains(","))
-            {
-                return int.Parse(numbers[0].ToString()) + int.Parse(numbers[2].ToString());
-            }
-
-            return int.Parse(numbers);
+            var items = numbers.Split(',').Select(int.Parse).ToList();
+            return items.Sum();
         }
     }
 }
