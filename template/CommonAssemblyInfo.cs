@@ -2,9 +2,9 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Gusztav Varga")]
-[assembly: AssemblyProduct("TddKata")]
-[assembly: AssemblyCopyright("Copyright © Gusztav Varga 2017")]
+[assembly: AssemblyCompany("GusztavVargaDr")]
+[assembly: AssemblyProduct("Tdd Katas")]
+[assembly: AssemblyCopyright("Copyright © GusztavVargaDr 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
