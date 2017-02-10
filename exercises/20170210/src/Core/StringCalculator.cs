@@ -11,7 +11,7 @@ namespace GusztavVargadDr.Tdd.Katas
                 return 0;
             }
 
-            var items = numbers.Split(',').Select(int.Parse).ToList();
+            var items = numbers.Split(',', '\n').Select(int.Parse).ToList();
             return items.Sum();
         }
     }
