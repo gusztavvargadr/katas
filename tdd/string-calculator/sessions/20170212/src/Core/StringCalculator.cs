@@ -2,9 +2,14 @@ namespace GusztavVargadDr.Katas.Tdd
 {
     public class StringCalculator
     {
+        private const int DefaultResult = 0;
+
         public int Add(string numbers)
         {
-            return 0;
+            if (numbers == string.Empty)
+                return DefaultResult;
+
+            return int.Parse(numbers);
         }
     }
 }
