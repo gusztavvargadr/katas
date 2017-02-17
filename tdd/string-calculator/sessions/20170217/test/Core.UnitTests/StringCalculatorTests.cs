@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace GusztavVargadDr.Katas.Tdd.UnitTests
 {
@@ -83,6 +84,47 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                 public void ReturnsSum(string numbers, int sum)
                 {
                     AssertResultEquals(numbers, sum);
+                }
+            }
+
+
+            public class NegativeNumbers : Add
+            {
+                [Theory]
+                [InlineData("-1")]
+                [InlineData("1,-2")]
+                [InlineData("-3,-4")]
+                public void ThrowsArgumentOutOfRange(string numbers)
+                {
+                    var stringCalculator = new StringCalculator();
+
+                    Assert.Throws<ArgumentOutOfRangeException>(() => stringCalculator.Add(numbers));
+                }
+
+                [Theory]
+                [InlineData("-1")]
+                [InlineData("1,-2")]
+                [InlineData("-3,-4")]
+                public void ThrowsAndMessageContainsNegativesNotAllowed(string numbers)
+                {
+                    var stringCalculator = new StringCalculator();
+
+                    var ex = Assert.ThrowsAny<Exception>(() => stringCalculator.Add(numbers));
+
+                    Assert.Contains("negatives not allowed", ex.Message);
+                }
+
+                [Theory]
+                [InlineData("-1", new[] {-1})]
+                [InlineData("1,-2", new[] {-2})]
+                [InlineData("-3,-4", new[] {-3, -4})]
+                public void ThrowsAndMessageContainsNegativeNumbers(string numbers, int[] negativeNumbers)
+                {
+                    var stringCalculator = new StringCalculator();
+
+                    var ex = Assert.ThrowsAny<Exception>(() => stringCalculator.Add(numbers));
+
+                    Assert.All(negativeNumbers, item => Assert.Contains(item.ToString(), ex.Message));
                 }
             }
         }
