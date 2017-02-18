@@ -36,6 +36,18 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                     AssertResultEquals(numbers, number);
                 }
             }
+
+            public class TwoNumbers : Add
+            {
+                [Theory]
+                [InlineData("0,1", 1)]
+                [InlineData("1,2", 3)]
+                [InlineData("2,3", 5)]
+                public void ReturnsSum(string numbers, int sum)
+                {
+                    AssertResultEquals(numbers, sum);
+                }
+            }
         }
     }
 }

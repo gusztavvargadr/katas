@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace GusztavVargadDr.Katas.Tdd
 {
     public class StringCalculator
@@ -8,6 +10,9 @@ namespace GusztavVargadDr.Katas.Tdd
         {
             if (numbers == string.Empty)
                 return DefaultSum;
+
+            if (numbers.Contains(','))
+                return int.Parse(numbers[0].ToString()) + int.Parse(numbers[2].ToString());
 
             return int.Parse(numbers);
         }
