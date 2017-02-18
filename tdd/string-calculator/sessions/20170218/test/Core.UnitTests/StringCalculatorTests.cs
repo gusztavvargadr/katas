@@ -60,6 +60,18 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                     AssertResultEquals(numbers, sum);
                 }
             }
+
+            public class NewLineDelimiter : Add
+            {
+                [Theory]
+                [InlineData("0,1\n2", 3)]
+                [InlineData("1\n2,3", 6)]
+                [InlineData("2\n3\n4", 9)]
+                public void ReturnsSum(string numbers, int sum)
+                {
+                    AssertResultEquals(numbers, sum);
+                }
+            }
         }
     }
 }
