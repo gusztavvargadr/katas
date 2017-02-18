@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace GusztavVargadDr.Katas.Tdd
@@ -6,30 +7,39 @@ namespace GusztavVargadDr.Katas.Tdd
     {
         private const int DefaultSum = 0;
 
-        private const string CustomDelimiterMark = "//";
-        private const char CustomDelimiterDelimiter = '\n';
+        private const string CustomNumberDelimiterMark = "//";
+        private const char CustomNumberDelimiterDelimiter = '\n';
 
-        private static readonly char[] DefaultDelimiters = {',', '\n'};
+        private const string NegativesNotAllowedMessage = "negatives not allowed";
+        private const string NegativeItemDelimiter = ", ";
+
+        private static readonly char[] DefaultNumberDelimiters = {',', '\n'};
 
         public StringCalculator()
         {
-            Delimiters = DefaultDelimiters;
+            NumberDelimiters = DefaultNumberDelimiters;
         }
 
-        private char[] Delimiters { get; set; }
+        private char[] NumberDelimiters { get; set; }
 
         public int Add(string numbers)
         {
             if (numbers == string.Empty)
                 return DefaultSum;
 
-            if (numbers.StartsWith(CustomDelimiterMark) && numbers[3] == CustomDelimiterDelimiter)
+            if (numbers.StartsWith(CustomNumberDelimiterMark) && numbers[3] == CustomNumberDelimiterDelimiter)
             {
-                Delimiters = new[] {numbers[2]};
+                NumberDelimiters = new[] {numbers[2]};
                 numbers = numbers.Substring(4);
             }
 
-            return numbers.Split(Delimiters).Sum(int.Parse);
+            var items = numbers.Split(NumberDelimiters).Select(int.Parse).ToList();
+            var negativeItems = items.Where(item => item < 0).ToList();
+            if (negativeItems.Any())
+                throw new ArgumentOutOfRangeException(nameof(numbers),
+                    $"{NegativesNotAllowedMessage}: {string.Join(NegativeItemDelimiter, negativeItems)}");
+
+            return items.Sum();
         }
     }
 }

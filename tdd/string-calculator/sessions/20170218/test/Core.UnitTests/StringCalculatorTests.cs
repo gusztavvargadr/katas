@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace GusztavVargadDr.Katas.Tdd.UnitTests
 {
@@ -14,6 +15,15 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                 var actualResult = stringCalculator.Add(numbers);
 
                 Assert.Equal(expectedResult, actualResult);
+            }
+
+            private static void AssertThrows<T>(string numbers, Action<T> exceptionHandler = null) where T : Exception
+            {
+                var stringCalculator = new StringCalculator();
+
+                var ex = Assert.ThrowsAny<T>(() => stringCalculator.Add(numbers));
+
+                exceptionHandler?.Invoke(ex);
             }
 
             public class EmptyString : Add
@@ -82,6 +92,37 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                 public void ReturnsSum(string numbers, int sum)
                 {
                     AssertResultEquals(numbers, sum);
+                }
+            }
+
+            public class NegativeNumbers : Add
+            {
+                [Theory]
+                [InlineData("-1")]
+                [InlineData("1,-2")]
+                [InlineData("-2,-3")]
+                public void ThrowsArgumentOutOfRange(string numbers)
+                {
+                    AssertThrows<ArgumentOutOfRangeException>(numbers);
+                }
+
+                [Theory]
+                [InlineData("-1")]
+                [InlineData("1,-2")]
+                [InlineData("-2,-3")]
+                public void ThrowsAndMessageContainsNegativesNotAllowedMessage(string numbers)
+                {
+                    AssertThrows<Exception>(numbers, ex => Assert.Contains("negatives not allowed", ex.Message));
+                }
+
+                [Theory]
+                [InlineData("-1", new[] {-1})]
+                [InlineData("1,-2", new[] {-2})]
+                [InlineData("-2,-3", new[] {-2, -3})]
+                public void ThrowsAndMessageContainsNegatives(string numbers, int[] negatives)
+                {
+                    AssertThrows<Exception>(numbers,
+                        ex => Assert.All(negatives, item => Assert.Contains(item.ToString(), ex.Message)));
                 }
             }
         }
