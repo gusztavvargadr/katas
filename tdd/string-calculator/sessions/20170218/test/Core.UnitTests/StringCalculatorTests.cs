@@ -83,7 +83,6 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                 {
                     AssertResultEquals(numbers, sum);
                 }
-
             }
         }
     }
