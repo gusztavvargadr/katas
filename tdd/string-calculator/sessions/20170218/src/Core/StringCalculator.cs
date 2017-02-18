@@ -13,6 +13,8 @@ namespace GusztavVargadDr.Katas.Tdd
         private const string NegativesNotAllowedMessage = "negatives not allowed";
         private const string NegativeItemDelimiter = ", ";
 
+        private const int SkipNumbersBiggerThan = 1000;
+
         private static readonly char[] DefaultNumberDelimiters = {',', '\n'};
 
         public StringCalculator()
@@ -39,7 +41,7 @@ namespace GusztavVargadDr.Katas.Tdd
                 throw new ArgumentOutOfRangeException(nameof(numbers),
                     $"{NegativesNotAllowedMessage}: {string.Join(NegativeItemDelimiter, negativeItems)}");
 
-            return items.Sum();
+            return items.Where(item => item <= SkipNumbersBiggerThan).Sum();
         }
     }
 }

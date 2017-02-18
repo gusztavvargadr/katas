@@ -125,6 +125,18 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                         ex => Assert.All(negatives, item => Assert.Contains(item.ToString(), ex.Message)));
                 }
             }
+
+            public class NumbersBiggerThanThousand : Add
+            {
+                [Theory]
+                [InlineData("1,1000", 1001)]
+                [InlineData("2,1001", 2)]
+                [InlineData("1001,1002", 0)]
+                public void ReturnsSumSkipped(string numbers, int sum)
+                {
+                    AssertResultEquals(numbers, sum);
+                }
+            }
         }
     }
 }
