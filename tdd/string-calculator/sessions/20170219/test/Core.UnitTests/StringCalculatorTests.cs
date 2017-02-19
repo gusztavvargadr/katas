@@ -6,16 +6,22 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
     {
         public class Add : StringCalculatorTests
         {
+            // ReSharper disable once UnusedParameter.Local
+            private static void AssertResultEquals(string numbers, int expectedResult)
+            {
+                var stringCalculator = new StringCalculator();
+
+                var actualResult = stringCalculator.Add(numbers);
+
+                Assert.Equal(expectedResult, actualResult);
+            }
+
             public class EmptyString : Add
             {
                 [Fact]
                 public void RetunsZero()
                 {
-                    var stringCalculator = new StringCalculator();
-
-                    var result = stringCalculator.Add(string.Empty);
-
-                    Assert.Equal(0, result);
+                    AssertResultEquals(string.Empty, 0);
                 }
             }
 
@@ -27,11 +33,7 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                 [InlineData("2", 2)]
                 public void ReturnsNumber(string numbers, int number)
                 {
-                    var stringCalculator = new StringCalculator();
-
-                    var result = stringCalculator.Add(numbers);
-
-                    Assert.Equal(number, result);
+                    AssertResultEquals(numbers, number);
                 }
             }
 
@@ -43,11 +45,7 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                 [InlineData("2,3", 5)]
                 public void ReturnsSum(string numbers, int sum)
                 {
-                    var stringCalculator = new StringCalculator();
-
-                    var result = stringCalculator.Add(numbers);
-
-                    Assert.Equal(sum, result);
+                    AssertResultEquals(numbers, sum);
                 }
             }
         }
