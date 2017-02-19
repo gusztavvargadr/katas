@@ -13,7 +13,7 @@ namespace GusztavVargadDr.Katas.Tdd
                 return DefaultResult;
 
             if (numbers.Contains(Delimiter))
-                return int.Parse(numbers[0].ToString()) + int.Parse(numbers[2].ToString());
+                return numbers.Split(Delimiter).Sum(int.Parse);
 
             return int.Parse(numbers);
         }
