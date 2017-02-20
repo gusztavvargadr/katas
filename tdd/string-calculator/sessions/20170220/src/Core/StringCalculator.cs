@@ -6,7 +6,10 @@ namespace GusztavVargadDr.Katas.Tdd
 
         public int Add(string numbers)
         {
-            return DefaultSum;
+            if (numbers == string.Empty)
+                return DefaultSum;
+
+            return int.Parse(numbers);
         }
     }
 }
