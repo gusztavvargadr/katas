@@ -72,6 +72,18 @@ namespace GusztavVargadDr.Katas.Tdd.UnitTests
                     AssertResultEquals(numbers, sum);
                 }
             }
+
+            public class CustomDelimiter : Add
+            {
+                [Theory]
+                [InlineData("//;\n1;2", 3)]
+                [InlineData("//:\n2:3:4", 9)]
+                [InlineData("///\n3/4/5/6", 18)]
+                public void ReturnsSum(string numbers, int sum)
+                {
+                    AssertResultEquals(numbers, sum);
+                }
+            }
         }
     }
 }
