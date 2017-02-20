@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace GusztavVargadDr.Katas.Tdd
@@ -8,6 +9,9 @@ namespace GusztavVargadDr.Katas.Tdd
 
         private const string CustomDelimiterMark = "//";
         private const char CustomDelimiterDelimiter = '\n';
+
+        private const string NegativesNotAllowedMessage = "negatives not allowed";
+        private const string NegativeDelmiter = ", ";
 
         private static readonly char[] DefaultDelimiters = {',', '\n'};
 
@@ -29,7 +33,14 @@ namespace GusztavVargadDr.Katas.Tdd
                 numbers = numbers.Substring(4);
             }
 
-            return numbers.Split(Delimiters).Sum(int.Parse);
+            var items = numbers.Split(Delimiters).Select(int.Parse).ToList();
+            var negativeItems = items.Where(item => item < 0).ToList();
+
+            if (negativeItems.Any())
+                throw new ArgumentOutOfRangeException(nameof(numbers),
+                    $"{NegativesNotAllowedMessage}: {string.Join(NegativeDelmiter, negativeItems)}");
+
+            return items.Sum();
         }
     }
 }
